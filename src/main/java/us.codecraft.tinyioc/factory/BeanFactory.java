@@ -8,6 +8,6 @@ public interface BeanFactory {
     Object getBean(String name);
 
     // 注册Bean
-    void registerBeanDefinition(String name, BeanDefinition beanDefinition);
+    void registerBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception;
 
 }
