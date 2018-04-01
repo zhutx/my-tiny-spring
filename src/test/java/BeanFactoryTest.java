@@ -7,14 +7,15 @@ public class BeanFactoryTest {
 
     @Test
     public void test() {
-        // 1.初始化beanfactory
+        // 1.初始化容器BeanFactory
         BeanFactory beanFactory = new BeanFactory();
 
-        // 2.注入bean
+        // 2.创建BeanDefinition
         BeanDefinition beanDefinition = new BeanDefinition(new HelloWorldService());
+        // 3.容器注册BeanDefinition
         beanFactory.registerBeanDefinition("helloWorldService", beanDefinition);
 
-        // 3.获取bean
+        // 4.获取Bean
         HelloWorldService helloWorldService = (HelloWorldService) beanFactory.getBean("helloWorldService");
         helloWorldService.helloWorld();
     }
