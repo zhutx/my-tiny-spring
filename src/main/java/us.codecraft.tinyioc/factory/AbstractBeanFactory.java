@@ -1,21 +1,25 @@
-package us.codecraft.tinyioc;
+package us.codecraft.tinyioc.factory;
+
+import us.codecraft.tinyioc.BeanDefinition;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class BeanFactory {
+public abstract class AbstractBeanFactory implements BeanFactory {
 
-    // 缓存名称到BeanDefinitaion的映射
     private Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<String, BeanDefinition>();
 
-    // 获取到Bean
+    @Override
     public Object getBean(String name) {
         return beanDefinitionMap.get(name).getBean();
     }
 
-    // 注册Bean
+    @Override
     public void registerBeanDefinition(String name, BeanDefinition beanDefinition) {
+        Object bean = doCreateBean(beanDefinition);
+        beanDefinition.setBean(bean);
         beanDefinitionMap.put(name, beanDefinition);
     }
 
+    protected abstract Object doCreateBean(BeanDefinition beanDefinition);
 }
