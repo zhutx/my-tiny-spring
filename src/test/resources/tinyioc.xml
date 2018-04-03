@@ -16,5 +16,4 @@
         <property name="text" value="Hello World!"></property>
         <property name="outputService" ref="outputService"></property>
     </bean>
-
 </beans>
