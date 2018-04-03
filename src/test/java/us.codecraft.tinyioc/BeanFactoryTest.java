@@ -23,7 +23,10 @@ public class BeanFactoryTest {
             beanFactory.registerBeanDefinition(beanDefinitionEntry.getKey(), beanDefinitionEntry.getValue());
         }
 
-        // 3.获取bean
+        // 3.初始化bean
+        beanFactory.preInstantiateSingletons();
+
+        // 4.获取bean
         HelloWorldService helloWorldService = (HelloWorldService) beanFactory.getBean("helloWorldService");
         helloWorldService.helloWorld();
 

@@ -6,6 +6,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import us.codecraft.tinyioc.AbstractBeanDefinitionReader;
 import us.codecraft.tinyioc.BeanDefinition;
+import us.codecraft.tinyioc.BeanReference;
 import us.codecraft.tinyioc.PropertyValue;
 import us.codecraft.tinyioc.io.ResourceLoader;
 
@@ -68,7 +69,21 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader{
                 Element propertyEle = (Element) node;
                 String name = propertyEle.getAttribute("name");
                 String value = propertyEle.getAttribute("value");
-                beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name,value));
+
+                // <property name="text" value="Hello World!"></property>
+                // <property name="outputService" ref="outputService"></property>
+                // 调整这一块
+                if (value != null && value.length() > 0) {
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+                } else {
+                    String ref = propertyEle.getAttribute("ref");
+                    if (ref == null || ref.length() == 0) {
+                        throw new IllegalArgumentException("Configuration problem: <property> element for property '"
+                                + name + "' must specify a ref or value");
+                    }
+                    BeanReference beanReference = new BeanReference(ref);
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
+                }
             }
         }
     }
