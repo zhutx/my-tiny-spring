@@ -33,7 +33,6 @@ public abstract class AbstractBeanFactory implements BeanFactory {
         beanDefinitionNames.add(name);
     }
 
-    @Override
     public void preInstantiateSingletons() throws Exception {
         for (Iterator it = this.beanDefinitionNames.iterator(); it.hasNext();) {
             String beanName = (String) it.next();

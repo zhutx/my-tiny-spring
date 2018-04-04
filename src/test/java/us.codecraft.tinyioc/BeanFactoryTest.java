@@ -1,6 +1,7 @@
 package us.codecraft.tinyioc;
 
 import org.junit.Test;
+import us.codecraft.tinyioc.factory.AbstractBeanFactory;
 import us.codecraft.tinyioc.factory.AutowireCapableBeanFactory;
 import us.codecraft.tinyioc.factory.BeanFactory;
 import us.codecraft.tinyioc.io.ResourceLoader;
@@ -18,7 +19,7 @@ public class BeanFactoryTest {
         xmlBeanDefinitionReader.loadBeanDefinitions("tinyioc.xml");
 
         // 2.初始化BeanFactory并注册bean
-        BeanFactory beanFactory = new AutowireCapableBeanFactory();
+        AbstractBeanFactory beanFactory = new AutowireCapableBeanFactory();
         for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : xmlBeanDefinitionReader.getRegistry().entrySet()) {
             beanFactory.registerBeanDefinition(beanDefinitionEntry.getKey(), beanDefinitionEntry.getValue());
         }
@@ -29,7 +30,6 @@ public class BeanFactoryTest {
         // 4.获取bean
         HelloWorldService helloWorldService = (HelloWorldService) beanFactory.getBean("helloWorldService");
         helloWorldService.helloWorld();
-
     }
 
 }
