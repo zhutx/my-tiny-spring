@@ -1,8 +1,8 @@
-package us.codecraft.tinyioc.factory;
+package us.codecraft.tinyioc.beans.factory;
 
-import us.codecraft.tinyioc.BeanDefinition;
+import us.codecraft.tinyioc.beans.BeanDefinition;
 import us.codecraft.tinyioc.BeanReference;
-import us.codecraft.tinyioc.PropertyValue;
+import us.codecraft.tinyioc.beans.PropertyValue;
 
 import java.lang.reflect.Field;
 
