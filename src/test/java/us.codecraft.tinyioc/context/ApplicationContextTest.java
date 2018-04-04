@@ -10,6 +10,7 @@ public class ApplicationContextTest {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("tinyioc.xml");
         HelloWorldService helloWorldService = (HelloWorldService) applicationContext.getBean("helloWorldService");
         helloWorldService.helloWorld();
+
     }
 
 }
